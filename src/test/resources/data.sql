@@ -1,0 +1,4 @@
+insert into Wikioffer(id,description,price,currency,expiration_Date,cancelled) values(101,'Food product',101,'USD',TO_DATE('2019-12-15', 'YYYY-MM-DD'),false);
+insert into Wikioffer(id,description,price,currency,expiration_Date,cancelled) values(102,'Drinks product',2000,'USD',TO_DATE('2020-01-15', 'YYYY-MM-DD'),false);
+insert into Wikioffer(id,description,price,currency,expiration_Date,cancelled) values(111,'Kids Product',3000,'USD',TO_DATE('2020-03-15', 'YYYY-MM-DD'),false);
+insert into Wikioffer(id,description,price,currency,expiration_Date,cancelled) values(112,'Electronics product',150,'USD',TO_DATE('2020-04-15', 'YYYY-MM-DD'),false);
