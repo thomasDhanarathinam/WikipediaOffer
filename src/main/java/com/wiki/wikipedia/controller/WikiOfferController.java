@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wiki.wikipedia.model.WikiOffer;
 import com.wiki.wikipedia.model.WikiOfferMultiConditions;
 import com.wiki.wikipedia.service.WikiOfferService;
-import com.wiki.wikipedia.service.WikiOfferServiceImpl;
 
 /**
  * @author thomas

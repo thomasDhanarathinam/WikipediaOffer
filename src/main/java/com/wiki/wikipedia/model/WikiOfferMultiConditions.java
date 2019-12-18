@@ -6,8 +6,6 @@ package com.wiki.wikipedia.model;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**

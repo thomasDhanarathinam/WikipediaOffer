@@ -19,8 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
-import com.wiki.wikipedia.error.WikiOfferNotFoundException;
 import com.wiki.wikipedia.model.WikiOffer;
 import com.wiki.wikipedia.model.WikiOfferMultiConditions;
 import com.wiki.wikipedia.repository.WikiOfferRepository;
@@ -52,35 +50,21 @@ public class WikiOfferServiceImpl implements WikiOfferService {
 		return responseWikiOffer;
 	}
 
-	/*
-	 * public ResponseEntity<WikiOffer> getWikiOfferById(Long id) { logger.
-	 * info("In getWikiOfferById(Long id) in WikiOfferServiceImpl class- Offer Id "
-	 * + id); ResponseEntity<WikiOffer> responseEntity = null; try {
-	 * Optional<WikiOffer> wikiOfferOptional = getWikiOfferByid(id); responseEntity
-	 * = wikiOfferOptional.map(wikiOffer -> getOptionalResponseEntity(wikiOffer))
-	 * .orElseThrow(() -> new WikiOfferNotFoundException()); } catch (Exception ex)
-	 * { logger.
-	 * error("Error in  getWikiOfferById(Long id) in WikiOfferServiceImpl class");
-	 * throw ex; } return responseEntity; }
-	 */
-	 
-	 
-	 public ResponseEntity<WikiOffer> getWikiOfferById(Long id) {
-			logger.info("In getWikiOfferById(Long id) in WikiOfferServiceImpl class- Offer Id " + id);
-			ResponseEntity<WikiOffer> responseEntity = null;
-			WikiOffer wikioffer = null;
-			try {
-				Optional<WikiOffer> wikiOfferOptional = getWikiOfferByid(id);
-				wikioffer = wikiOfferOptional.map(wikiOffer -> wikiExpireDateValidation(wikiOffer))
-						.orElseThrow(() -> new WikiOfferNotFoundException());
-				
-				responseEntity = ResponseEntity.ok().body(wikioffer);
-			} catch (Exception ex) {
-				logger.error("Error in  getWikiOfferById(Long id) in WikiOfferServiceImpl class");
-				throw ex;
-			}
-			return responseEntity;
+	
+	public ResponseEntity<WikiOffer> getWikiOfferById(Long id) {
+		logger.info("In getWikiOfferById(Long id) in WikiOfferServiceImpl class- Offer Id " + id);
+		ResponseEntity<WikiOffer> responseEntity = null;
+		try {
+			Optional<WikiOffer> wikiOfferOptional = getWikiOfferByid(id);
+			responseEntity = wikiOfferOptional.map(wikiOffer -> getOptionalResponseEntity(wikiOffer))
+					.orElseGet(() -> ResponseEntity.notFound().build());
+
+		} catch (Exception ex) {
+			logger.error("Error in  getWikiOfferById(Long id) in WikiOfferServiceImpl class");
+			throw ex;
 		}
+		return responseEntity;
+	}
 
 	public ResponseEntity<String> cancelWikiOfferById(Long id) {
 		logger.info("In cancelWikiOfferById(Long id) in WikiOfferServiceImpl class- Offer Id " + id);
